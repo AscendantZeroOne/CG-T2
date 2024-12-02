@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilinear</title>
+    <link rel="stylesheet" href="./bilinear.css">
+</head>
+<body>
+    <div class="container-buttons">
+        <button onClick="location.href = '../index.html'" type="button">Voltar</button>
+        <button id="rotation-x-minus">Eixo X--</button>
+        <button id="rotation-x-plus">Eixo X++</button>
+        <button id="rotation-y-minus">Eixo Y--</button>
+        <button id="rotation-y-plus">Eixo Y++</button>
+        <button id="rotation-z-minus">Eixo Z--</button>
+        <button id="rotation-z-plus">Eixo Z++</button>
+    </div>
+    <div id="canvas-container"></div>
+    <script src="../threejs.js"></script>
+    <script src="./TweenMax.min.js"></script> 
+    <script src="./bilinear.js" type="module"></script>
+</body>
+</html>
