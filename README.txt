@@ -1,0 +1,1 @@
+Para iniciar o programa selecione star.bat. É apenas um .bat pequeno que inicia o servidor
