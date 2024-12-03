@@ -11,7 +11,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.querySelector('#canvas-container').appendChild(renderer.domElement);
 
 // Fonte de luz
-const light = new THREE.PointLight(0xffffff, 1, 500);
+let light = new THREE.PointLight(0xffffff, 1, 500);
 light.position.set(100, 0, 100);
 scene.add(light);
 
@@ -20,12 +20,12 @@ scene.add(ambientLight);
 
 // Esfera
 const sphereGeometry = new THREE.SphereGeometry(50, 32, 32);
-const sphereMaterial = new THREE.MeshPhongMaterial({
+let sphereMaterial = new THREE.MeshPhongMaterial({
     color: 0xff00ff,
     shininess: 100,
     specular: 0xffffff,
 });
-const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 sphere.position.set(0, 0, 0);
 scene.add(sphere);
 
@@ -41,11 +41,34 @@ plane.position.set(0, -50, 0);
 plane.rotation.x = -Math.PI / 2;
 scene.add(plane);
 
-// Função de animação
 const animate = () => {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 };
 
-// Iniciar a animação
+const changeLight = () => {
+    const newColor = prompt("Digite a nova cor da esfera (em formato hexadecimal, exemplo: #ff0000):", "#00ff00");
+    const newShininess = parseFloat(prompt("Digite o novo valor de brilho (shininess) da esfera (exemplo: 50):", "150"));
+    const newSpecular = prompt("Digite a nova cor da especularidade (em formato hexadecimal, exemplo: #ffffff):", "#aaaaaa");
+
+    if (newColor && !isNaN(newShininess) && newSpecular) {
+        scene.remove(sphere);
+
+        sphereMaterial = new THREE.MeshPhongMaterial({
+            color: newColor,
+            shininess: newShininess,
+            specular: newSpecular,
+        });
+
+        sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        sphere.position.set(0, 0, 0);
+
+        scene.add(sphere);
+    } else {
+        alert("Os valores fornecidos são inválidos. Tente novamente.");
+    }
+};
+
+document.getElementById('change-light').addEventListener('click', changeLight);
+
 animate();
