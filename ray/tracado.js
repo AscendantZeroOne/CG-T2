@@ -47,7 +47,7 @@ const animate = () => {
 };
 
 const changeLight = () => {
-    const newColor = prompt("Digite a nova cor da esfera (em formato hexadecimal, exemplo: #ff0000):", "#00ff00");
+    const newColor = prompt("Digite a nova cor da esfera (em formato hexadecimal, exemplo: #ff0000):", "#0000ff");
     const newShininess = parseFloat(prompt("Digite o novo valor de brilho (shininess) da esfera (exemplo: 50):", "150"));
     const newSpecular = prompt("Digite a nova cor da especularidade (em formato hexadecimal, exemplo: #ffffff):", "#aaaaaa");
 
