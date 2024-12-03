@@ -1,3 +1,4 @@
+// Configuração da cena
 const scene = new THREE.Scene();
 
 // Configuração da câmera
@@ -76,10 +77,42 @@ const sphereMaterial = new THREE.ShaderMaterial({
         }
     `
 });
+
+// Adicionar a esfera à cena
 const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 scene.add(sphere);
 
-// Animação
+// Função para alterar os uniforms
+const changeLight = () => {
+    const newI_a = parseFloat(prompt("Digite a nova intensidade da luz ambiente (I_a):", sphereMaterial.uniforms.I_a.value));
+    const newI_l = parseFloat(prompt("Digite a nova intensidade da luz pontual (I_l):", sphereMaterial.uniforms.I_l.value));
+    const newKd = parseFloat(prompt("Digite o novo coeficiente de difusão (Kd):", sphereMaterial.uniforms.Kd.value));
+    const newKs = parseFloat(prompt("Digite o novo coeficiente especular (Ks):", sphereMaterial.uniforms.Ks.value));
+    const newKa = parseFloat(prompt("Digite o novo coeficiente de ambiente (Ka):", sphereMaterial.uniforms.Ka.value));
+    const newK = parseFloat(prompt("Digite o novo fator de atenuação (K):", sphereMaterial.uniforms.K.value));
+    const newN = parseFloat(prompt("Digite o novo valor exponencial especular (n):", sphereMaterial.uniforms.n.value));
+
+    if (
+        !isNaN(newI_a) && !isNaN(newI_l) && !isNaN(newKd) &&
+        !isNaN(newKs) && !isNaN(newKa) && !isNaN(newK) && !isNaN(newN)
+    ) {
+        // Atualizar uniforms
+        sphereMaterial.uniforms.I_a.value = newI_a;
+        sphereMaterial.uniforms.I_l.value = newI_l;
+        sphereMaterial.uniforms.Kd.value = newKd;
+        sphereMaterial.uniforms.Ks.value = newKs;
+        sphereMaterial.uniforms.Ka.value = newKa;
+        sphereMaterial.uniforms.K.value = newK;
+        sphereMaterial.uniforms.n.value = newN;
+    } else {
+        alert("Um ou mais valores fornecidos são inválidos. Tente novamente.");
+    }
+};
+
+// Evento para alterar iluminação
+document.getElementById('change-light').addEventListener('click', changeLight);
+
+// Função de animação
 const animate = () => {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
